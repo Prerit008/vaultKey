@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* Obsidian & Amber – dark by default for a serious security-tool feel */
+        --background: 0 0% 3%;
+        --foreground: 0 0% 98%;
+        --card: 0 0% 6%;
+        --card-foreground: 0 0% 98%;
+        --popover: 0 0% 6%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 41 100% 50%;
+        --primary-foreground: 0 0% 9%;
+        --secondary: 0 0% 12%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 0 0% 12%;
+        --muted-foreground: 0 0% 60%;
+        --accent: 41 100% 50%;
+        --accent-foreground: 0 0% 9%;
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 15%;
+        --input: 0 0% 15%;
+        --ring: 41 100% 50%;
+        --radius: 0.125rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html,
+    body,
+    #root {
+        min-height: 100vh;
+        background: hsl(var(--background));
+        color: hsl(var(--foreground));
+    }
+    body {
+        margin: 0;
+        font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .font-mono,
+    code,
+    kbd,
+    pre {
+        font-family:
+            "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+            Consolas, monospace;
+    }
+    ::selection {
+        background: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+    }
+}
+
+/* Grain texture overlay for unlock screen */
+.grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.98  0 0 0 0 0.98  0 0 0 0 0.98  0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+/* Amber ring pulse */
+@keyframes pulse-amber {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.blink-caret {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    vertical-align: -2px;
+    background: hsl(var(--primary));
+    animation: caret 1s steps(1) infinite;
+    margin-left: 4px;
+}
+@keyframes caret {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+}
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+}
