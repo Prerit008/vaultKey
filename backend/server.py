@@ -93,7 +93,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(level
 logger = logging.getLogger(__name__)
 
 # Mount static files
-frontend_build = ROOT_DIR.parent / "backend" / "build"
+frontend_build = ROOT_DIR.parent / "frontend" / "build"
 if frontend_build.exists():
     app.mount("/", StaticFiles(directory=str(frontend_build), html=True), name="static")
 else:
